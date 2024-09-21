@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Flower</title>
+    <style>
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+<body>
+
+<audio id="music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
+
+<div class="flower-container" onclick="handleClick(event)">
+    <div class="text-above">🌻 feliz 21 de septiembre 🌻</div>
+    <div class="flower">
+        <div class="mid"></div>
+        <div class="Petal1 p1"></div>
+        <div class="Petal1 p2"></div>
+        <div class="Petal1 p3"></div>
+        <div class="Petal1 p4"></div>
+        <div class="Petal2 p1"></div>
+        <div class="Petal2 p2"></div>
+        <div class="Petal2 p3"></div>
+        <div class="Petal2 p4"></div>
+        <div class="Petal3 p1"></div>
+        <div class="Petal3 p2"></div>
+        <div class="Petal3 p3"></div>
+        <div class="Petal3 p4"></div>
+    </div>
+    <div class="text-below">❤️ Ana ❤️ </div>
+</div>
+
+<script>
+let musicStarted = false;
+
+function handleClick(event) {
+    if (!musicStarted) {
+        const music = document.getElementById('music');
+        music.play();
+        musicStarted = true;
+    }
+
+    const emojis = ['🌻', '🌼', '🌷', '🌸', '🌺', '🌼'];
+    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+    const emojiElement = document.createElement('div');
+    emojiElement.textContent = randomEmoji;
+    emojiElement.className = 'emoji';
+
+    const x = Math.random() * (window.innerWidth - 50);
+    const y = Math.random() * (window.innerHeight - 50);
+    emojiElement.style.left = `${x}px`;
+    emojiElement.style.top = `${y}px`;
+
+    document.body.appendChild(emojiElement);
+
+    setTimeout(() => {
+        emojiElement.style.opacity = 1;
+    }, 0);
+
+    setTimeout(() => {
+        emojiElement.style.opacity = 0;
+        setTimeout(() => {
+            document.body.removeChild(emojiElement);
+        }, 2000);
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
